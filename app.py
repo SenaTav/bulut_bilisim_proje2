@@ -24,9 +24,6 @@ client = MongoClient("mongodb+srv://senatavv:sena6432@cluster0.5urrqbx.mongodb.n
 db = client["HediyeRehberiDB"]
 koleksiyon = db["AnlikVeriler"]
 
-# ==========================================
-# ANALİZ MERKEZİ (Madde 4 Şartı)
-# ==========================================
 istatistikler = {
     "Teknoloji": 0,
     "Aksesuar": 0,
@@ -49,7 +46,7 @@ def handle_websocket(ws):
         veri = json.loads(data)
         veri["zaman_damgasi"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        # 1. BULUT VERİ AKIŞINA GÖNDER (GCP Pub/Sub)
+    
         try:
             mesaj_verisi = json.dumps(veri).encode("utf-8")
             future = yayinlayici.publish(konu_yolu, mesaj_verisi)
@@ -57,14 +54,12 @@ def handle_websocket(ws):
         except Exception as e:
             print(f"[GOOGLE CLOUD HATASI] {e}")
 
-        # 2. VERİTABANINA KAYIT (MongoDB Atlas)
         try:
             koleksiyon.insert_one(veri.copy())
             print(f"[MONGODB ATLAS] Veri buluta kaydedildi!")
         except Exception as e:
             print(f"[MONGODB HATASI] {e}")
 
-        # 3. ANLIK ANALİZ İŞLEMİ VE RAPORLAMA
         guncel_kategori = None
 
         if veri.get('tip') == "KULLANICI_PROFILI":
