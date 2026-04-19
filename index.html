@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hediye Rehberim - Akıllı Öneri</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+       body { 
+            font-family: 'Poppins', sans-serif; 
+            
+            background: linear-gradient(-45deg, #e0f2fe, #fce7f3, #e0e7ff, #fdf4ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            
+            color: #2d3436; 
+            text-align: center; 
+            padding: 40px 20px; 
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 { color: #ff4757; font-size: 2.5em; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.05); }
+        .subtitle { color: #747d8c; font-size: 1.1em; margin-bottom: 30px; }
+
+        .setup-screen { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            max-width: 450px; 
+            margin: 0 auto; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+        }
+
+        select { 
+            width: 90%; 
+            padding: 12px 15px; 
+            margin: 15px 0; 
+            border: 2px solid #f1f2f6; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-family: 'Poppins', sans-serif;
+            color: #2f3542;
+            cursor: pointer; 
+            transition: 0.3s;
+            background-color: #f8f9fa;
+        }
+        select:focus { border-color: #ff4757; outline: none; }
+
+        button.primary-btn { 
+            background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%); 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 30px; 
+            font-size: 18px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-top: 20px; 
+            width: 90%;
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.25);
+            transition: 0.3s;
+        }
+        button.primary-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 71, 87, 0.4); }
+
+        .hidden { display: none; }
+        .gift-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 30px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+        
+        .gift-card { 
+            background: white; 
+            padding: 30px 20px; 
+            border-radius: 20px; 
+            width: 200px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            position: relative;
+            border: 1px solid #f1f2f6;
+        }
+             
+        .gift-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+            border-color: #ff4757;
+        }
+
+        .gift-icon { 
+            font-size: 3.5em; 
+            display: block; 
+            margin-bottom: 15px; 
+            animation: float 3s ease-in-out infinite; 
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gift-card h3 { font-size: 1.1em; color: #2f3542; margin: 0 0 10px 0; }
+        .gift-card p { color: #a4b0be; font-size: 0.9em; margin: 0; font-weight: 600;}
+
+        .back-btn {
+            background: white; color: #ff4757; border: 2px solid #ff4757;
+            padding: 10px 25px; border-radius: 20px; font-weight: 600; font-family: 'Poppins';
+            cursor: pointer; margin-top: 40px; transition: 0.3s;
+        }
+        .back-btn:hover { background: #ff4757; color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="setup-screen" class="setup-screen">
+        <h1>🎁 Hediye Rehberi</h1>
+        <p class="subtitle">Sevdiklerin için en doğru seçimi yap</p>
+        
+        <p style="text-align: left; margin-bottom: 5px; color: #576574; font-weight: 600;">Kime hediye arıyorsun?</p>
+        <select id="target">
+            <option value="Arkadaş">✌️ Arkadaşa</option>
+            <option value="Sevgili">❤️ Sevgiliye</option>
+            <option value="Aile">🏡 Aileye</option>
+        </select>
+        
+        <p style="text-align: left; margin-bottom: 5px; color: #576574; font-weight: 600; margin-top: 15px;">İlgi alanı nedir?</p>
+        <select id="interest">
+            <option value="Teknoloji">💻 Teknoloji</option>
+            <option value="Aksesuar">💎 Takı/Aksesuar</option>
+            <option value="Deneyim">🎟️ Aksiyon & Deneyim</option>
+            <option value="Gurme">🍷 Mutfak</option>
+            <option value="Sanat">🎨 Sanat & Hobi</option>
+            <option value="Spor">🏋️ Sağlıklı Yaşam</option>
+            <option value="Ev-Dekor">🪴 Ev/Dekorasyon</option>
+        </select>
+        
+        <button class="primary-btn" onclick="startRecommendation()">Uygun Hediyeleri Bul</button>
+    </div>
+
+    <div id="main-screen" class="hidden">
+        <h2 id="welcome-msg" style="color: #2f3542;">Sizin İçin Seçtiklerimiz</h2>
+        <p class="subtitle">Detaylarını incelemek için bir hediyeye tıkla.</p>
+        
+        <div id="gift-list" class="gift-container"></div>
+        
+        <button class="back-btn" onclick="location.reload()">🔄 Başa Dön ve Yeniden Seç</button>
+    </div>
+
+    <script>
+        const socket = new WebSocket('ws://' + location.host + '/ws');
+
+        
+        const hediyeler = [
+            { ad: "Akıllı Saat", kat: "Teknoloji", grup: "Sevgili", simge: "⌚" },
+            { ad: "Polaroid Kamera", kat: "Teknoloji", grup: "Sevgili", simge: "📸" },
+            { ad: "Mini Projeksiyon", kat: "Teknoloji", grup: "Sevgili", simge: "📽️" },
+            { ad: "İsimli Kolye", kat: "Aksesuar", grup: "Sevgili", simge: "💍" },
+            { ad: "Saat", kat: "Aksesuar", grup: "Sevgili", simge: "⏱️" },
+            { ad: "Özel Tasarım Deri Cüzdan", kat: "Aksesuar", grup: "Sevgili", simge: "👛" },
+            { ad: "Akşam Yemeği", kat: "Deneyim", grup: "Sevgili", simge: "🕯️" },
+            { ad: "Masaj / Spa", kat: "Deneyim", grup: "Sevgili", simge: "💆‍♀️" },
+            { ad: "Doğa Kampı", kat: "Deneyim", grup: "Sevgili", simge: "⛺" },
+            { ad: "Çikolata Sepeti ", kat: "Gurme", grup: "Sevgili", simge: "🍫" },
+            { ad: "Tadım Paketi", kat: "Gurme", grup: "Sevgili", simge: "👩‍🍳" },
+            { ad: "Dünya Kahveleri Seti", kat: "Gurme", grup: "Sevgili", simge: "☕" },
+            { ad: "Heykel Atölyesi", kat: "Sanat", grup: "Sevgili", simge: "🏺" },
+            { ad: "Portre Çizimi", kat: "Sanat", grup: "Sevgili", simge: "🖼️" },
+            { ad: "Çiftlere Özel Anı Defteri", kat: "Sanat", grup: "Sevgili", simge: "📔" },
+            { ad: "Spor Matarası", kat: "Spor", grup: "Sevgili", simge: "💧" },
+            { ad: "Akıllı Vücut Analiz Tartısı", kat: "Spor", grup: "Sevgili", simge: "⚖️" },
+            { ad: "Kamp Sandalyesi", kat: "Spor", grup: "Sevgili", simge: "🪑" },
+            { ad: "3D Ay Gece Lambası", kat: "Ev-Dekor", grup: "Sevgili", simge: "🌕" },
+            { ad: "Birlikte Çekilmiş Tablo", kat: "Ev-Dekor", grup: "Sevgili", simge: "🖼️" },
+            { ad: "Sonsuzluk Gülü", kat: "Ev-Dekor", grup: "Sevgili", simge: "🌹" },
+
+           
+            { ad: "Oyuncu Kulaklığı", kat: "Teknoloji", grup: "Arkadaş", simge: "🎧" },
+            { ad: "Aydınlatmalı klavye", kat: "Teknoloji", grup: "Arkadaş", simge: "🖱️" },
+            { ad: "Taşınabilir Hoparlör", kat: "Teknoloji", grup: "Arkadaş", simge: "🔊" },
+            { ad: "Doğal Taş Bileklik", kat: "Aksesuar", grup: "Arkadaş", simge: "📿" },
+            { ad: "Güneş Gözlüğü", kat: "Aksesuar", grup: "Arkadaş", simge: "🕶️" },
+            { ad: "Eğlenceli Tasarım Tişört", kat: "Aksesuar", grup: "Arkadaş", simge: "👕" },
+            { ad: "Turnuva Bileti", kat: "Deneyim", grup: "Arkadaş", simge: "🎫" },
+            { ad: "Konser / Festival Bileti", kat: "Deneyim", grup: "Arkadaş", simge: "🎟️" },
+            { ad: "Korku Evi", kat: "Deneyim", grup: "Arkadaş", simge: "👻" },
+            { ad: "Sos Tadım Seti", kat: "Gurme", grup: "Arkadaş", simge: "🌶️" },
+            { ad: "Kupa bardak", kat: "Gurme", grup: "Arkadaş", simge: "🫗" },
+            { ad: "Kutu Abur Cubur Paketi", kat: "Gurme", grup: "Arkadaş", simge: "🍿" },
+            { ad: "Duvar Tablosu", kat: "Sanat", grup: "Arkadaş", simge: "🎨" },
+            { ad: "Kutu Oyunu", kat: "Sanat", grup: "Arkadaş", simge: "🎲" },
+            { ad: "Mandala Boyama Seti", kat: "Sanat", grup: "Arkadaş", simge: "🖍️" },
+            { ad: "Ayarlanabilir Dambıl Seti", kat: "Spor", grup: "Arkadaş", simge: "🏋️" },
+            { ad: "Kaymaz Yoga Matı", kat: "Spor", grup: "Arkadaş", simge: "🧘" },
+            { ad: "Direnç Bandı Seti", kat: "Spor", grup: "Arkadaş", simge: "🤸" },
+            { ad: "Arcade Mini Oyun Makinesi", kat: "Ev-Dekor", grup: "Arkadaş", simge: "🕹️" },
+            { ad: "Duvar saati", kat: "Ev-Dekor", grup: "Arkadaş", simge: "🕛" },
+            { ad: "Kaktüs / Büyük bitki", kat: "Ev-Dekor", grup: "Arkadaş", simge: "🌵" },
+
+           
+            { ad: "Robot Süpürge", kat: "Teknoloji", grup: "Aile", simge: "🤖" },
+            { ad: "Fotoğraf makinesi", kat: "Teknoloji", grup: "Aile", simge: "📹" },
+            { ad: "Görev Tablet", kat: "Teknoloji", grup: "Aile", simge: "📱" },
+            { ad: "Kol Saati", kat: "Aksesuar", grup: "Aile", simge: "⌚" },
+            { ad: "Atkı", kat: "Aksesuar", grup: "Aile", simge: "🧣" },
+            { ad: "İsim Yazılı kalem", kat: "Aksesuar", grup: "Aile", simge: "🖊️" },
+            { ad: "Ailecek Termal Otel Tatili", kat: "Deneyim", grup: "Aile", simge: "♨️" },
+            { ad: "Boğazda Aile Boyu Tekne Turu", kat: "Deneyim", grup: "Aile", simge: "⛴️" },
+            { ad: "Tiyatro bileti", kat: "Deneyim", grup: "Aile", simge: "🎭" },
+            { ad: "Kahve Makinesi", kat: "Gurme", grup: "Aile", simge: "☕" },
+            { ad: "Gurme Peynirler", kat: "Gurme", grup: "Aile", simge: "🧀" },
+            { ad: "Yöresel Lezzetler Paketi", kat: "Gurme", grup: "Aile", simge: "🍯" },
+            { ad: "Puzzle", kat: "Sanat", grup: "Aile", simge: "🧩" },
+            { ad: "Ebru Sanatı ", kat: "Sanat", grup: "Aile", simge: "🖌️" },
+            { ad: "Pikap ve Plak", kat: "Sanat", grup: "Aile", simge: "📻" },
+            { ad: "Koşu Bandı", kat: "Spor", grup: "Aile", simge: "🏃" },
+            { ad: "Spor Bisikleti", kat: "Spor", grup: "Aile", simge: "🚴" },
+            { ad: "Pilates topu", kat: "Spor", grup: "Aile", simge: "💆" },
+            { ad: "Anatomik Ortopedik koltuk", kat: "Ev-Dekor", grup: "Aile", simge: "💺" },
+            { ad: "Salon Mumluk Seti", kat: "Ev-Dekor", grup: "Aile", simge: "🕯️" },
+            { ad: "Büyük Boy Salon Bitkisi", kat: "Ev-Dekor", grup: "Aile", simge: "🪴" }
+        ];
+
+        function startRecommendation() {
+            const target = document.getElementById('target').value;
+            const interest = document.getElementById('interest').value;
+
+            if(socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ tip: "KULLANICI_PROFILI", kime: target, ilgi_alani: interest }));
+            }
+
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('main-screen').classList.remove('hidden');
+            
+            const interestText = document.getElementById('interest').options[document.getElementById('interest').selectedIndex].text;
+            document.getElementById('welcome-msg').innerText = `${target} İçin ${interestText} Hediyeleri`;
+
+            const filtered = hediyeler.filter(h => h.grup === target && h.kat === interest);
+            const listDiv = document.getElementById('gift-list');
+            listDiv.innerHTML = '';
+
+            filtered.forEach(h => {
+                const card = document.createElement('div');
+                card.className = 'gift-card';
+                card.innerHTML = `<span class="gift-icon">${h.simge}</span><h3>${h.ad}</h3><p>${h.kat}</p>`;
+                card.onclick = () => {
+                    if(socket.readyState === WebSocket.OPEN) {
+                        socket.send(JSON.stringify({tip: "HEDIYE_TIKLAMA", ad: h.ad, kat: h.kat, kime: target}));
+                        alert(`✔️ ${h.ad} detayları anlık olarak analiz sistemine (Buluta) gönderildi!`);
+                    }
+                };
+                listDiv.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

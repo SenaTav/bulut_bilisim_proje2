@@ -1,0 +1,5 @@
+Flask
+flask-sock
+pymongo
+google-cloud-pubsub
+gunicorn
