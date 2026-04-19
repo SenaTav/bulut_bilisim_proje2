@@ -78,7 +78,6 @@ def handle_websocket(ws):
         
         print(f">>> ANLIK İŞLEM : Veri analize dahil edildi.")
         print(f">>> GENEL ANALİZ: Şu an lider kategori: {en_cok_ilgi} ({istatistikler[en_cok_ilgi]} puan)")
-        print("-" * 50)
 
 if __name__ == '__main__':
     app.run(port=3000)
